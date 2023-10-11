@@ -1,0 +1,21 @@
+
+app:
+  name: no-axure
+  version: 1.0.0
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DB_URL}:3306/noaxure
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
+    format-sql: true
+
+logging:
+  level:
+    com.example.noaxure: debug
