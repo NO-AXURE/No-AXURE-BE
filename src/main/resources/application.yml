@@ -1,3 +1,5 @@
+server:
+  port: 9040
 
 app:
   name: no-axure
@@ -9,13 +11,21 @@ spring:
     url: jdbc:mariadb://${DB_URL}:3306/noaxure
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MariaDBDialect
-    show-sql: true
-    format-sql: true
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+  mapper-locations: classpath*:mapper/**/*_SqlMapper.xml,mapper/**/**/*_SqlMapper.xml
+  plugins:
+    sqlAudit: true
+    logback: true
+    systemLog: true
+    cipherField: false
+    eaiInterface: false
 
 logging:
   level:
     com.example.noaxure: debug
+
