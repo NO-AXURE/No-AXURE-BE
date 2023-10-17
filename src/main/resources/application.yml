@@ -25,6 +25,11 @@ mybatis:
     cipherField: false
     eaiInterface: false
 
+auth:
+  secretKey: noaxure
+  authExpiry: 1200000 #20min
+  refreshExpiry: 8000000 #6hours
+
 logging:
   level:
     com.example.noaxure: debug

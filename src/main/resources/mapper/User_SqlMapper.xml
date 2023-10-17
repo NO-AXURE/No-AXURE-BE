@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.noaxure.mapper.UserMapper">
+
+
+
+    <select id="selectUser" resultType="com.example.noaxure.model.table.User">
+        SELECT userId,
+               password,
+               name,
+               email
+        FROM user
+        WHERE
+            userId = #{userId}
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO user (
+            userId,
+            password,
+            name,
+            email
+        ) VALUES (
+            #{userId}
+           ,#{password}
+           ,#{name}
+           ,#{email}
+        )
+    </insert>
+</mapper>
