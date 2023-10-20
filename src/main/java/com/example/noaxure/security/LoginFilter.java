@@ -6,6 +6,8 @@ import com.example.noaxure.model.dto.request.UserRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
@@ -29,6 +31,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     //Manager 구현체를 직접 작성해야한다
 
     private final jwtSupport jwtSupport;
+
+
+
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try{
@@ -46,8 +52,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String userName = authResult.getName();
-        String clientIp = request.getRemoteAddr();
-        response.addHeader("token", jwtSupport.generateToken(userName,clientIp));
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+        response.addHeader("token", jwtSupport.generateToken(userName));
         response.addHeader("userId",userName);
     }
 
