@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-    private final PasswordEncoder passwordEncoder;
+
     @Override
     public User get(String userId) {
         return userMapper.selectUser(userId);
@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int signUp(UserRequestDto userRequestDto) {
-        userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
         return userMapper.insertUser(userRequestDto.toModel());
     }
 

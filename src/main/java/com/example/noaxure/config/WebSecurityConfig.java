@@ -1,5 +1,8 @@
-package com.example.noaxure.security;
+package com.example.noaxure.config;
 
+import com.example.noaxure.security.AuthenticationFilter;
+import com.example.noaxure.security.LoginFilter;
+import com.example.noaxure.security.jwtSupport;
 import com.example.noaxure.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final jwtSupport jwtSupport;
+    private final com.example.noaxure.security.jwtSupport jwtSupport;
     private final UserService userService;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
