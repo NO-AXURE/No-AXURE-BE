@@ -1,45 +1,43 @@
-package com.example.noaxure.auth;
+package com.example.noaxure.security;
+
 
 import com.example.noaxure.model.dto.request.UserRequestDto;
-import com.example.noaxure.model.table.User;
-import com.example.noaxure.service.UserService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 @Slf4j
 @RequiredArgsConstructor
-public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+@Getter
+public class LoginFilter extends UsernamePasswordAuthenticationFilter {
+    //Manager 구현체를 직접 작성해야한다
 
-    private UserService userService;
-
-    public AuthenticationFilter(AuthenticationManager authenticationManager, UserService userService) {
-        super(authenticationManager);
-        this.userService = userService;
-    }
-
-
+    private final jwtSupport jwtSupport;
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try{
-            UserRequestDto requestLogin = new ObjectMapper().readValue(request.getInputStream(), UserRequestDto.class);
 
-            return getAuthenticationManager().authenticate(
-                    new UsernamePasswordAuthenticationToken(requestLogin.getUserId(),requestLogin.getPassword(),new ArrayList<>())
-            );
+            UserRequestDto requestLogin = new ObjectMapper().readValue(request.getInputStream(), UserRequestDto.class);
+            Authentication authentication =  new UsernamePasswordAuthenticationToken(requestLogin.getUserId(),requestLogin.getPassword(),new ArrayList<>());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            return authentication;
         }catch(IOException e){
             throw new RuntimeException(e);
         }
@@ -48,12 +46,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String userName = authResult.getName();
-        User user = userService.get(userName);
-
-        response.addHeader("token",AuthSupport.generateToken(user.getUserId()));
-        response.addHeader("userId",user.getUserId());
-
-
+        String clientIp = request.getRemoteAddr();
+        response.addHeader("token", jwtSupport.generateToken(userName,clientIp));
+        response.addHeader("userId",userName);
     }
 
 

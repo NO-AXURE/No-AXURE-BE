@@ -4,10 +4,12 @@ package com.example.noaxure.service;
 import com.example.noaxure.model.dto.request.UserRequestDto;
 
 import com.example.noaxure.model.table.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public interface UserService {
+public interface UserService  {
 
     public User get(String userId);
 
@@ -16,4 +18,6 @@ public interface UserService {
     public int delete(UserRequestDto userRequestDto);
 
     public int update(UserRequestDto userRequestDto);
+
+
 }

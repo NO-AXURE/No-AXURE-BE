@@ -4,10 +4,16 @@ package com.example.noaxure.service.impl;
 import com.example.noaxure.mapper.UserMapper;
 import com.example.noaxure.model.dto.request.UserRequestDto;
 import com.example.noaxure.model.table.User;
+import com.example.noaxure.security.LoginUser;
 import com.example.noaxure.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +39,7 @@ public class UserServiceImpl implements UserService {
     public int delete(UserRequestDto userRequestDto) {
         return userMapper.deleteUser(userRequestDto.toModel());
     }
+
 
 
 }

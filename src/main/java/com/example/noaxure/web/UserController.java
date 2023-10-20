@@ -6,6 +6,7 @@ import com.example.noaxure.model.table.User;
 import com.example.noaxure.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +16,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/test")
+    @GetMapping("test")
     public void test(){
         System.out.println("test");
     }
@@ -44,8 +45,5 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(UserRequestDto userRequestDto){
-        return ResponseEntity.ok(userRequestDto);
-    }
+
 }
