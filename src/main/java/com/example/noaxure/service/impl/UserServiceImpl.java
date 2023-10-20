@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+
+    private final PasswordEncoder passwordEncoder;
     @Override
     public User get(String userId) {
         return userMapper.selectUser(userId);
@@ -33,6 +37,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public int update(UserRequestDto userRequestDto) {
         return userMapper.updateUser(userRequestDto.toModel());
+    }
+
+    @Override
+    public int signUp(UserRequestDto userRequestDto) {
+        userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+        return userMapper.insertUser(userRequestDto.toModel());
     }
 
     @Override

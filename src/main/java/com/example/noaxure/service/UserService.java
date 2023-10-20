@@ -19,5 +19,8 @@ public interface UserService  {
 
     public int update(UserRequestDto userRequestDto);
 
+    public int signUp(UserRequestDto userRequestDto);
+
+
 
 }
