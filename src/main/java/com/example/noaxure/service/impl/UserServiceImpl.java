@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
-
     @Override
     public User get(String userId) {
         return userMapper.selectUser(userId);
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int signUp(UserRequestDto userRequestDto) {
-        return userMapper.insertUser(userRequestDto.toModel());
+               return userMapper.insertUser(userRequestDto.toModel());
     }
 
     @Override
