@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.noaxure.mapper.ContentBoardMapper">
+
+
+
+    <select id="selectContentBoardDataList" resultType="com.example.noaxure.model.dto.request.ContentBoardRequestDto">
+        SELECT
+			contentBoard.id AS id , contentBoard.content_id AS contentId, content.name AS contentNm, content.category_id AS contentCategoryId,
+			boardDetail.id AS boardDetailId, boardDetail.rank AS boardDetailRank, boardDetail.image AS boardDetailImage
+		FROM contentBoard
+		JOIN content
+		ON contentBoard.content_id = content.id
+		JOIN boardDetail
+		ON contentBoard.id = boardDetail.contentBoard_id
+    </select>
+</mapper>
