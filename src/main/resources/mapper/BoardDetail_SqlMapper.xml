@@ -4,15 +4,34 @@
 
 <mapper namespace="com.example.noaxure.mapper.BoardDetailMapper">
 
+	<select id="selectBoardDetail" resultType="com.example.noaxure.model.table.BoardDetail">
+	SELECT * FROM boardDetail WHERE id = #{id}
+	</select>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--기존데이터 이미지 업로드용 이제 안씀-->
     <update id="updateBoardDetail" parameterType="com.example.noaxure.model.table.BoardDetail">
         UPDATE boardDetail
         SET
-        	title = #{title},
-        	content = #{content},
+        	title="베테랑",
+        	content="약쟁이쉑 어이없어서 잡아넣는 이야기",
         	image = #{image},
-        	rank = #{rank}
+        	rank=NULL
         WHERE id = #{id}
     </update>
+
+
 </mapper>

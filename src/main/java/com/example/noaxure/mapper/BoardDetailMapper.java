@@ -7,5 +7,6 @@ import com.example.noaxure.model.table.BoardDetail;
 
 @Mapper
 public interface BoardDetailMapper {
+	BoardDetail selectBoardDetail(int id);
     int updateBoardDetail(BoardDetail boardDetail);
 }
