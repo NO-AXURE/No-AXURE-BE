@@ -7,18 +7,18 @@
 
 
     <select id="selectUser" resultType="com.example.noaxure.model.table.User">
-        SELECT userId,
+        SELECT user_id,
                password,
                name,
                email
         FROM user
         WHERE
-            userId = #{userId}
+            user_id = #{userId}
     </select>
 
     <insert id="insertUser">
         INSERT INTO user (
-            userId,
+            user_id,
             password,
             name,
             email
