@@ -18,10 +18,11 @@ public class UserController {
     private final UserService userService;
 
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<ResultData> get(@PathVariable String userId){
+    @GetMapping("/{userId}/{password}")
+    public ResponseEntity<ResultData> get(@PathVariable String userId, @PathVariable String password){
         System.out.println(123);
         User user = userService.get(userId);
+        user = userService.get(password);
         return ResultData.ok(user);
     }
 
