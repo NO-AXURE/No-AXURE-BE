@@ -29,4 +29,15 @@
            ,#{email}
         )
     </insert>
+	<update id="updateUser">
+		UPDATE user
+		SET user_id = #{userId},
+		    password = #{password},
+		    name = #{name},
+		    email = #{email}
+		WHERE user_id = #{userId}
+	</update>
+    <delete id="deleteUser">
+    	DELETE FROM user WHERE user_id = #{userId} AND password = #{password}
+  	</delete>
 </mapper>
