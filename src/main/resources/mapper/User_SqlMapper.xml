@@ -12,8 +12,7 @@
                name,
                email
         FROM user
-        WHERE
-            user_id = #{userId} AND password = #{password}
+        WHERE user_id = #{userId}
     </select>
 
     <insert id="insertUser">
