@@ -19,5 +19,5 @@ public class BaseController {
 		map.put("테스트", "1");
 		return map;
 	}
-	
+
 }

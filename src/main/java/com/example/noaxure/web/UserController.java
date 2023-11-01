@@ -31,14 +31,14 @@ public class UserController {
         return ResultData.ok(result);
     }
 
-    @PutMapping("/")
-    public ResponseEntity<ResultData> put(@RequestBody UserRequestDto userRequestDto){
+    @PutMapping("/{userId}")
+    public ResponseEntity<ResultData> put(@PathVariable String userId, @RequestBody UserRequestDto userRequestDto){
         int result = userService.update(userRequestDto);
         return ResultData.ok(result);
     }
 
-    @DeleteMapping("/")
-    public ResponseEntity<ResultData> delete(@RequestBody UserRequestDto userRequestDto){
+    @DeleteMapping("/{userId}/{password}")
+    public ResponseEntity<ResultData> delete(@PathVariable String userId, @PathVariable String password, @RequestBody UserRequestDto userRequestDto){
         int result = userService.delete(userRequestDto);
         return ResultData.ok(result);
     }
