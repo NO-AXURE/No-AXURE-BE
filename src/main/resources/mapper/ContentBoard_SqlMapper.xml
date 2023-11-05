@@ -9,7 +9,7 @@
     <select id="selectContentBoardDataList" resultType="com.example.noaxure.model.dto.request.ContentBoardRequestDto">
         SELECT
 			contentBoard.id AS id , contentBoard.content_id AS contentId, content.name AS contentNm, content.category_id AS contentCategoryId,
-			boardDetail.id AS boardDetailId, boardDetail.rank AS boardDetailRank, boardDetail.image AS boardDetailImage
+			boardDetail.id AS boardDetailId, boardDetail.rank AS boardDetailRank, boardDetail.image AS boardDetailImage, boardDetail.content AS boardDetailContent
 		FROM contentBoard
 		JOIN content
 		ON contentBoard.content_id = content.id
