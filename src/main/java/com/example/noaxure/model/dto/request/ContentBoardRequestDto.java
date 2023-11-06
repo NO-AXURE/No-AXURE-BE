@@ -12,6 +12,6 @@ public class ContentBoardRequestDto {
 	private int contentCategoryId;
 	private int boardDetailId;
 	private int boardDetailRank;
-	private String boardDetailImage;
+	private byte[] boardDetailImage;
 	private String boardDetailContent;
 }
