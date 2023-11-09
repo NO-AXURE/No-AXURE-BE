@@ -8,7 +8,9 @@
 	SELECT * FROM boardDetail WHERE id = #{id}
 	</select>
 
-
+	<select id="selectContentBoardfileDataById" resultType="com.example.noaxure.model.table.BoardDetail">
+	SELECT * FROM boardDetail WHERE id = #{id}
+	</select>
 
 
 

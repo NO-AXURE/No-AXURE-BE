@@ -24,4 +24,10 @@ public class BoardDetailServiceImpl implements BoardDetailService{
 		return boardDetailMapper.updateBoardDetail(boardDetailRequestDto.toModel());
 	}
 
+	@Override
+	public BoardDetail getContentBoardfileData(int id) {
+		// TODO Auto-generated method stub
+		return boardDetailMapper.selectContentBoardfileDataById(id);
+	}
+
 }

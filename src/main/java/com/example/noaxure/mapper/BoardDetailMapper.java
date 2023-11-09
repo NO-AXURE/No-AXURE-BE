@@ -9,4 +9,5 @@ import com.example.noaxure.model.table.BoardDetail;
 public interface BoardDetailMapper {
 	BoardDetail selectBoardDetail(int id);
     int updateBoardDetail(BoardDetail boardDetail);
+    BoardDetail selectContentBoardfileDataById(int id);
 }
